@@ -1,0 +1,25 @@
+{
+  "name": "backlog-mcp-server",
+  "version": "1.0.0",
+  "description": "Backlog MCP Server",
+  "main": "build/index.js",
+  "type": "module",
+  "bin": {
+    "backlog-mcp-server": "build/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build",
+    "start": "node build/index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.10.0",
+    "axios": "^1.6.0",
+    "zod": "^3.22.4",
+    "zod-to-json-schema": "^3.22.3",
+    "typescript": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0"
+  }
+}
