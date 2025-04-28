@@ -1,6 +1,9 @@
 ## 機能
 - [x] [課題情報の取得](https://developer.nulab.com/ja/docs/backlog/api/2/get-issue/)
 - [x] [課題コメントの取得](https://developer.nulab.com/ja/docs/backlog/api/2/get-comment-list/)
+- [x] [課題添付ファイルのダウンロード](https://developer.nulab.com/ja/docs/backlog/api/2/get-issue-attachment/)
+- [x] [課題添付ファイル一覧の取得](https://developer.nulab.com/ja/docs/backlog/api/2/get-list-of-issue-attachments/)
+- [x] [課題共有ファイル一覧の取得](https://developer.nulab.com/ja/docs/backlog/api/2/get-list-of-linked-shared-files/)
 
 ## Install
 
@@ -17,7 +20,10 @@
     "backlog": {
       "autoApprove": [
         "get_issue",
-        "get_issue_comments"
+        "get_issue_comments",
+        "get_issue_attachments",
+        "get_issue_attachment",
+        "get_issue_shared_files"
       ],
       "disabled": false,
       "timeout": 60,

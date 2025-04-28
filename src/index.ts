@@ -86,13 +86,98 @@ server.tool(
   }
 );
 
+// 課題添付ファイル一覧取得ツールを追加
+server.tool(
+  "get_issue_attachments",
+  {
+    issueIdOrKey: z.string().describe("課題のID または 課題キー"),
+  },
+  async ({ issueIdOrKey }) => {
+    try {
+      const result = await backlogClient.getIssueAttachments({ issueIdOrKey });
+      return {
+        content: [{ type: "text", text: JSON.stringify(result, null, 2) }],
+      };
+    } catch (error) {
+      if (error instanceof Error) {
+        return {
+          content: [{ type: "text", text: error.message }],
+          isError: true,
+        };
+      }
+      return {
+        content: [{ type: "text", text: "Unknown error" }],
+        isError: true,
+      };
+    }
+  }
+);
+
+// 課題添付ファイルダウンロードツールを追加
+server.tool(
+  "get_issue_attachment",
+  {
+    issueIdOrKey: z.string().describe("課題のID または 課題キー"),
+    attachmentId: z.string().describe("添付ファイルID"),
+  },
+  async ({ issueIdOrKey, attachmentId }) => {
+    try {
+      const result = await backlogClient.getIssueAttachment({ issueIdOrKey, attachmentId });
+      return {
+        content: [{ type: "text", text: JSON.stringify({ 
+          message: "ファイルをBase64エンコードで返却します",
+          fileData: result.fileData.substring(0, 100) + "..." // サイズが大きいため先頭部分のみ表示
+        }, null, 2) }],
+      };
+    } catch (error) {
+      if (error instanceof Error) {
+        return {
+          content: [{ type: "text", text: error.message }],
+          isError: true,
+        };
+      }
+      return {
+        content: [{ type: "text", text: "Unknown error" }],
+        isError: true,
+      };
+    }
+  }
+);
+
+// 課題共有ファイル一覧取得ツールを追加
+server.tool(
+  "get_issue_shared_files",
+  {
+    issueIdOrKey: z.string().describe("課題のID または 課題キー"),
+  },
+  async ({ issueIdOrKey }) => {
+    try {
+      const result = await backlogClient.getIssueSharedFiles({ issueIdOrKey });
+      return {
+        content: [{ type: "text", text: JSON.stringify(result, null, 2) }],
+      };
+    } catch (error) {
+      if (error instanceof Error) {
+        return {
+          content: [{ type: "text", text: error.message }],
+          isError: true,
+        };
+      }
+      return {
+        content: [{ type: "text", text: "Unknown error" }],
+        isError: true,
+      };
+    }
+  }
+);
+
 // サーバーを起動
 async function start() {
   try {
     const transport = new StdioServerTransport();
     await server.connect(transport);
     console.error(`Backlog MCP Server ready (Space: ${SPACE})`);
-    console.error(`Available tools: get_issue, get_issue_comments`);
+    console.error(`Available tools: get_issue, get_issue_comments, get_issue_attachments, get_issue_attachment, get_issue_shared_files`);
   } catch (error) {
     console.error('Error starting server:', error);
     process.exit(1);

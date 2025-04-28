@@ -130,3 +130,43 @@ export interface GetIssueCommentsParams {
 export interface GetIssueCommentsResponse {
   comments: BacklogComment[];
 }
+
+// 課題添付ファイル一覧取得API関連の型定義
+export interface GetIssueAttachmentsParams {
+  issueIdOrKey: string;
+}
+
+export interface GetIssueAttachmentsResponse {
+  attachments: BacklogAttachment[];
+}
+
+// 課題添付ファイルダウンロードAPI関連の型定義
+export interface GetIssueAttachmentParams {
+  issueIdOrKey: string;
+  attachmentId: string;
+}
+
+export interface GetIssueAttachmentResponse {
+  fileData: string; // Base64エンコードされたファイルデータ
+}
+
+// 課題共有ファイル一覧取得API関連の型定義
+export interface GetIssueSharedFilesParams {
+  issueIdOrKey: string;
+}
+
+export interface SharedFile {
+  id: number;
+  type: string;
+  dir: string;
+  name: string;
+  size: number;
+  created: string;
+  createdUser: BacklogUser;
+  updated: string;
+  updatedUser: BacklogUser;
+}
+
+export interface GetIssueSharedFilesResponse {
+  sharedFiles: SharedFile[];
+}

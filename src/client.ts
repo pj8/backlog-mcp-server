@@ -1,5 +1,16 @@
 import axios from 'axios';
-import type { GetIssueParams, GetIssueResponse, GetIssueCommentsParams, GetIssueCommentsResponse } from './types.js';
+import type { 
+  GetIssueParams, 
+  GetIssueResponse, 
+  GetIssueCommentsParams, 
+  GetIssueCommentsResponse,
+  GetIssueAttachmentsParams,
+  GetIssueAttachmentsResponse,
+  GetIssueAttachmentParams,
+  GetIssueAttachmentResponse,
+  GetIssueSharedFilesParams,
+  GetIssueSharedFilesResponse 
+} from './types.js';
 
 export class BacklogClient {
   private client;
@@ -47,6 +58,59 @@ export class BacklogClient {
         params: queryParams
       });
       return { comments: response.data };
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        throw new Error(`Backlog API Error: ${error.response?.status} - ${error.response?.statusText}`);
+      }
+      throw error;
+    }
+  }
+
+  /**
+   * 課題の添付ファイル一覧を取得する
+   */
+  async getIssueAttachments(params: GetIssueAttachmentsParams): Promise<GetIssueAttachmentsResponse> {
+    try {
+      const { issueIdOrKey } = params;
+      const response = await this.client.get(`/api/v2/issues/${issueIdOrKey}/attachments`);
+      return { attachments: response.data };
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        throw new Error(`Backlog API Error: ${error.response?.status} - ${error.response?.statusText}`);
+      }
+      throw error;
+    }
+  }
+
+  /**
+   * 課題の添付ファイルをダウンロードする
+   */
+  async getIssueAttachment(params: GetIssueAttachmentParams): Promise<GetIssueAttachmentResponse> {
+    try {
+      const { issueIdOrKey, attachmentId } = params;
+      const response = await this.client.get(`/api/v2/issues/${issueIdOrKey}/attachments/${attachmentId}`, {
+        responseType: 'arraybuffer'
+      });
+      
+      // バイナリデータをBase64エンコード
+      const fileData = Buffer.from(response.data).toString('base64');
+      return { fileData };
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        throw new Error(`Backlog API Error: ${error.response?.status} - ${error.response?.statusText}`);
+      }
+      throw error;
+    }
+  }
+
+  /**
+   * 課題の共有ファイル一覧を取得する
+   */
+  async getIssueSharedFiles(params: GetIssueSharedFilesParams): Promise<GetIssueSharedFilesResponse> {
+    try {
+      const { issueIdOrKey } = params;
+      const response = await this.client.get(`/api/v2/issues/${issueIdOrKey}/sharedFiles`);
+      return { sharedFiles: response.data };
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
         throw new Error(`Backlog API Error: ${error.response?.status} - ${error.response?.statusText}`);
