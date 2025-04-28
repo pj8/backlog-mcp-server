@@ -1,14 +1,13 @@
 # 作業コンテキスト - Backlog MCP Server
 
 ## 現在の作業内容
-- 添付ファイル関連の3つのAPI機能の実装
+- 種別一覧取得APIの実装
 - ドキュメントの更新と進捗状況の反映
 
 ## 最近の変更点
-- 課題添付ファイル一覧取得APIの実装 `get_issue_attachments`
-- 課題添付ファイルダウンロードAPIの実装 `get_issue_attachment`
-- 課題共有ファイル一覧取得APIの実装 `get_issue_shared_files`
-- READMEの更新（機能リスト、autoApproveの設定）
+- 種別一覧取得APIの実装 `get_project_issue_types`
+- 課題添付ファイル関連APIの実装 (`get_issue_attachments`, `get_issue_attachment`, `get_issue_shared_files`)
+- READMEの更新（機能リスト、チェックマークの更新）
 - メモリーバンクの進捗ドキュメント更新
 
 ## 次のステップ

@@ -259,3 +259,12 @@ export interface UpdateCommentResponse {
   stars: any[];
   notifications: any[];
 }
+
+// 種別一覧取得API関連の型定義
+export interface GetProjectIssueTypesParams {
+  projectIdOrKey: string;
+}
+
+export interface GetProjectIssueTypesResponse {
+  issueTypes: BacklogIssueType[];
+}

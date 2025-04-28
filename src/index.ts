@@ -312,13 +312,40 @@ server.tool(
   }
 );
 
+// プロジェクト種別一覧取得ツールを追加
+server.tool(
+  "get_project_issue_types",
+  {
+    projectIdOrKey: z.string().describe("プロジェクトのID または プロジェクトキー"),
+  },
+  async ({ projectIdOrKey }) => {
+    try {
+      const result = await backlogClient.getProjectIssueTypes({ projectIdOrKey });
+      return {
+        content: [{ type: "text", text: JSON.stringify(result, null, 2) }],
+      };
+    } catch (error) {
+      if (error instanceof Error) {
+        return {
+          content: [{ type: "text", text: error.message }],
+          isError: true,
+        };
+      }
+      return {
+        content: [{ type: "text", text: "Unknown error" }],
+        isError: true,
+      };
+    }
+  }
+);
+
 // サーバーを起動
 async function start() {
   try {
     const transport = new StdioServerTransport();
     await server.connect(transport);
     console.error(`Backlog MCP Server ready (Space: ${SPACE})`);
-    console.error(`Available tools: get_issue, get_issue_comments, get_issue_attachments, get_issue_attachment, get_issue_shared_files, add_issue, update_issue, add_comment, update_comment`);
+    console.error(`Available tools: get_issue, get_issue_comments, get_issue_attachments, get_issue_attachment, get_issue_shared_files, add_issue, update_issue, add_comment, update_comment, get_project_issue_types`);
   } catch (error) {
     console.error('Error starting server:', error);
     process.exit(1);

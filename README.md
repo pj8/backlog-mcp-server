@@ -8,6 +8,7 @@
 - [x] [課題情報の更新](https://developer.nulab.com/ja/docs/backlog/api/2/update-issue/)
 - [x] [課題コメントの追加](https://developer.nulab.com/ja/docs/backlog/api/2/add-comment/)
 - [x] [課題コメント情報の更新](https://developer.nulab.com/ja/docs/backlog/api/2/update-comment/)
+- [x] [種別一覧の取得](https://developer.nulab.com/ja/docs/backlog/api/2/get-issue-type-list/)
 
 ## Install
 
@@ -27,7 +28,8 @@
         "get_issue_comments",
         "get_issue_attachments",
         "get_issue_attachment",
-        "get_issue_shared_files"
+        "get_issue_shared_files",
+        "get_issue_types"
       ],
       "disabled": false,
       "timeout": 60,

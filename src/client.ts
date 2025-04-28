@@ -17,7 +17,9 @@ import type {
   AddCommentParams,
   AddCommentResponse,
   UpdateCommentParams,
-  UpdateCommentResponse
+  UpdateCommentResponse,
+  GetProjectIssueTypesParams,
+  GetProjectIssueTypesResponse
 } from './types.js';
 
 export class BacklogClient {
@@ -182,6 +184,22 @@ export class BacklogClient {
       const { issueIdOrKey, commentId, content } = params;
       const response = await this.client.patch(`/api/v2/issues/${issueIdOrKey}/comments/${commentId}`, { content });
       return response.data;
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        throw new Error(`Backlog API Error: ${error.response?.status} - ${error.response?.statusText}`);
+      }
+      throw error;
+    }
+  }
+
+  /**
+   * プロジェクトの種別一覧を取得する
+   */
+  async getProjectIssueTypes(params: GetProjectIssueTypesParams): Promise<GetProjectIssueTypesResponse> {
+    try {
+      const { projectIdOrKey } = params;
+      const response = await this.client.get(`/api/v2/projects/${projectIdOrKey}/issueTypes`);
+      return { issueTypes: response.data };
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
         throw new Error(`Backlog API Error: ${error.response?.status} - ${error.response?.statusText}`);
