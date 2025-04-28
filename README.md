@@ -4,6 +4,10 @@
 - [x] [課題添付ファイルのダウンロード](https://developer.nulab.com/ja/docs/backlog/api/2/get-issue-attachment/)
 - [x] [課題添付ファイル一覧の取得](https://developer.nulab.com/ja/docs/backlog/api/2/get-list-of-issue-attachments/)
 - [x] [課題共有ファイル一覧の取得](https://developer.nulab.com/ja/docs/backlog/api/2/get-list-of-linked-shared-files/)
+- [x] [課題の追加](https://developer.nulab.com/ja/docs/backlog/api/2/add-issue/)
+- [x] [課題情報の更新](https://developer.nulab.com/ja/docs/backlog/api/2/update-issue/)
+- [x] [課題コメントの追加](https://developer.nulab.com/ja/docs/backlog/api/2/add-comment/)
+- [x] [課題コメント情報の更新](https://developer.nulab.com/ja/docs/backlog/api/2/update-comment/)
 
 ## Install
 
