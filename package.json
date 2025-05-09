@@ -8,8 +8,10 @@
     "backlog-mcp-server": "build/index.js"
   },
   "scripts": {
-    "build": "tsc",
+    "check-engines": "npx check-node-version --node '>=20.0.0' --npm '>=10.0.0'",
+    "preprepare": "npm run check-engines",
     "prepare": "npm run build",
+    "build": "tsc",
     "start": "node build/index.js"
   },
   "dependencies": {
