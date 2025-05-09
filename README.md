@@ -1,3 +1,6 @@
+## Requirements
+- Nodejs 20以上, NPM 10以上
+
 ## 機能
 - [x] [課題情報の取得](https://developer.nulab.com/ja/docs/backlog/api/2/get-issue/)
 - [x] [課題コメントの取得](https://developer.nulab.com/ja/docs/backlog/api/2/get-comment-list/)
