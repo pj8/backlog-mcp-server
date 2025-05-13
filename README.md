@@ -1,3 +1,9 @@
+
+[公式のbacklog-mcp-server](https://github.com/nulab/backlog-mcp-server/blob/main/README.ja.md)がリリースされましたのでそちらをご利用ください。
+
+----
+
+
 ## Requirements
 - Nodejs 20以上, NPM 10以上
 
